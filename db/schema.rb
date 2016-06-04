@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160604181102) do
+ActiveRecord::Schema.define(version: 20160604205656) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 20160604181102) do
     t.datetime "date"
     t.string   "company"
     t.decimal  "tax"
-    t.string   "string"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "employee_id"
@@ -62,10 +61,15 @@ ActiveRecord::Schema.define(version: 20160604181102) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
 
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
